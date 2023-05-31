@@ -10,15 +10,15 @@ import 'package:time_tracker/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker/services/auth.dart';
 
 class EmailSignInFormChangeNotifier extends StatefulWidget {
-  EmailSignInFormChangeNotifier({this.model});
-  final EmailSignInChangeModel? model;
+  EmailSignInFormChangeNotifier({ required this.model});
+  final EmailSignInChangeModel model;
 
   static Widget create(BuildContext context) {
     final auth = Provider.of<AuthBase>(context, listen: false);
     return ChangeNotifierProvider<EmailSignInChangeModel>(
       create: (_) => EmailSignInChangeModel(auth: auth),
       child: Consumer<EmailSignInChangeModel>(
-        builder: (_, model, __) => EmailSignInFormChangeNotifier(model: model!),
+        builder: (_, model, __) => EmailSignInFormChangeNotifier(model: model),
       ),
     );
   }
@@ -47,7 +47,7 @@ class _EmailSignInFormChangeNotifierState extends State<EmailSignInFormChangeNot
 
   Future<void> _submit() async {
     try {
-      await widget.model?.submit();
+      await widget.model.submit();
       Navigator.of(context).pop();
     } on FirebaseAuthException catch (e) {
       showExceptionAlertDialog(
@@ -76,13 +76,13 @@ class _EmailSignInFormChangeNotifierState extends State<EmailSignInFormChangeNot
       _buildEmailTextField(),
       SizedBox(height: 8.0),
       _buildPasswordTextField(),
-      SizedBox(height: 8.0),
-      FormSubmitButton(
-        text: model.primaryButtonText,
-        onPressed: model.canSubmit ? _submit : null,
+      SizedBox(height: 16.0),
+      TextButton(
+          child: Text(model.primaryButtonText),
+        onPressed: !model.canSubmit ? _submit : null,
       ),
       SizedBox(height: 8.0),
-      FloatingActionButton(
+      TextButton(
         child: Text(model.secondaryButtonText),
         onPressed: !model.isLoading ? _toggleFormType : null,
       ),

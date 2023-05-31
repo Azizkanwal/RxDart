@@ -5,10 +5,11 @@ class FormSubmitButton extends CustomRaisedButton {
   FormSubmitButton({
     required String text,
     VoidCallback? onPressed,
-  }) : super(
+  }) :assert(text.isNotEmpty),
+        super(
           child: Text(
             text,
-            style: TextStyle(color: Colors.white, fontSize: 20.0),
+            style: TextStyle(color: Colors.white, fontSize: 18.0),
           ),
           height: 44.0,
           color: Colors.indigo,

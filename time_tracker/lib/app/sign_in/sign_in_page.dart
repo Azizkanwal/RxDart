@@ -11,11 +11,11 @@ import 'package:time_tracker/services/auth.dart';
 class SignInPage extends StatelessWidget {
   const SignInPage({
     Key? key,
-    required this.manager,
-    required this.isLoading,
+     this.manager,
+     this.isLoading,
   }) : super(key: key);
-  final SignInManager manager;
-  final bool isLoading;
+  final SignInManager? manager;
+  final bool? isLoading;
 
   static Widget create(BuildContext context) {
     final auth = Provider.of<AuthBase>(context, listen: false);
@@ -47,7 +47,7 @@ class SignInPage extends StatelessWidget {
 
   Future<void> _signInAnonymously(BuildContext context) async {
     try {
-      await manager.signInAnonymously();
+      await manager?.signInAnonymously();
     } on Exception catch (e) {
       _showSignInError(context, e);
     }
@@ -97,7 +97,7 @@ class SignInPage extends StatelessWidget {
             text: 'Sign in with email',
             textColor: Colors.white,
             color: Colors.teal[700],
-            onPressed: isLoading ? null : () => _signInWithEmail(context),
+            onPressed: isLoading!? null : () => _signInWithEmail(context),
           ),
           SizedBox(height: 8.0),
           Text(
@@ -110,7 +110,7 @@ class SignInPage extends StatelessWidget {
             text: 'Go anonymous',
             textColor: Colors.black,
             color: Colors.lime[300],
-            onPressed: isLoading ? null : () => _signInAnonymously(context),
+            onPressed: isLoading! ? null : () => _signInAnonymously(context),
           ),
         ],
       ),
@@ -118,7 +118,7 @@ class SignInPage extends StatelessWidget {
   }
 
   Widget _buildHeader() {
-    if (isLoading) {
+    if (isLoading!) {
       return Center(
         child: CircularProgressIndicator(),
       );
