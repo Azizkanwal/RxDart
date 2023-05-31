@@ -87,7 +87,7 @@ class _EditJobPageState extends State<EditJobPage> {
         elevation: 2.0,
         title: Text(widget.job == null ? 'New Job' : 'Edit Job'),
         actions: <Widget>[
-          FloatingActionButton(
+          TextButton(
             child: Text(
               'Save',
               style: TextStyle(fontSize: 18, color: Colors.white),

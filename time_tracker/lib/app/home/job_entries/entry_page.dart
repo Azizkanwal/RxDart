@@ -15,12 +15,13 @@ class EntryPage extends StatefulWidget {
   final Job job;
   final Entry? entry;
 
+
   static Future<void> show(
       {required BuildContext context, required Database database, required Job job,  Entry? entry}) async {
     await Navigator.of(context, rootNavigator: true).push(
       MaterialPageRoute(
         builder: (context) =>
-            EntryPage(database: database, job: job, entry: entry!),
+            EntryPage(database: database, job: job, entry: entry),
         fullscreenDialog: true,
       ),
     );
@@ -87,7 +88,7 @@ class _EntryPageState extends State<EntryPage> {
         elevation: 2.0,
         title: Text(widget.job.name),
         actions: <Widget>[
-          FloatingActionButton(
+          TextButton(
             child: Text(
               widget.entry != null ? 'Update' : 'Create',
               style: TextStyle(fontSize: 18.0, color: Colors.white),

@@ -21,6 +21,7 @@ class JobEntriesPage extends StatelessWidget {
 
   static Future<void> show(BuildContext context, Job job) async {
     final database = Provider.of<Database>(context, listen: false);
+    print("Name click "+job.name);
     await Navigator.of(context).push(
       CupertinoPageRoute(
         fullscreenDialog: false,
@@ -43,7 +44,7 @@ class JobEntriesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<Job?>(
+    return StreamBuilder<Job>(
         stream: database.jobStream(jobId: job.id),
         builder: (context, snapshot) {
           final job = snapshot.data;
@@ -72,14 +73,16 @@ class JobEntriesPage extends StatelessWidget {
                 ),
               ],
             ),
-            body: _buildContent(context, job!),
+            body: _buildContent(context, job),
           );
         });
   }
 
-  Widget _buildContent(BuildContext context, Job job) {
+  Widget _buildContent(BuildContext context, Job? job) {
+
+    print("_buildContent  ${job?.name}");
     return StreamBuilder<List<Entry>>(
-      stream: database.entriesStream(job: job),
+      stream: database.entriesStream(job: job!),
       builder: (context, snapshot) {
         return ListItemsBuilder<Entry>(
           snapshot: snapshot,

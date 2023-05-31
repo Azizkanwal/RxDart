@@ -19,11 +19,11 @@ Future showAlertDialog(
         content: Text(content),
         actions: <Widget>[
           if (cancelActionText != null)
-            FloatingActionButton(
+            TextButton(
               child: Text(cancelActionText),
               onPressed: () => Navigator.of(context).pop(false),
             ),
-          FloatingActionButton(
+          TextButton(
             child: Text(defaultActionText),
             onPressed: () => Navigator.of(context).pop(true),
           ),

@@ -33,7 +33,7 @@ class FirestoreDatabase implements Database {
   Future<void> deleteJob(Job job) async {
     // delete where entry.jobId == job.jobId
     final allEntries = await entriesStream(job: job).first;
-    for (Entry entry in allEntries) {
+    for (Entry entry in allEntries!) {
       if (entry.jobId == job.id) {
         await deleteEntry(entry);
       }
